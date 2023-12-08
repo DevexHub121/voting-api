@@ -12,8 +12,8 @@ const PORT = process.env.PORT || 5000;
 const userRoutes = require("./routes/userRoutes")
 const voteRoutes = require("./routes/voteRoutes")
 const allowedOrigins = [
- " https://voting-app-2015d.web.app",
- 'https://voting-app-2015d.firebaseapp.com',
+ "https://voting-app-2015d.web.app",
+ "https://voting-app-2015d.firebaseapp.com",
 ];
 app.use(cors({
     origin: allowedOrigins,
