@@ -4,7 +4,7 @@ const dotenv = require('dotenv').config();
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({extended: true}))
 const cors = require('cors');
 const connectDB = require("./db/conn")
 const PORT = process.env.PORT || 5000;
