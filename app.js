@@ -14,6 +14,7 @@ const voteRoutes = require("./routes/voteRoutes")
 const allowedOrigins = [
  "https://voting-app-2015d.web.app",
  "https://voting-app-2015d.firebaseapp.com",
+ //"http://localhost:5173"
 ];
 app.use(cors({
     origin: allowedOrigins,
@@ -24,7 +25,7 @@ app.use("/api/votes", voteRoutes);
 
 const start = async()=>{
   try{
-    await connectDB(process.env.DATABASE_ATLAS)
+    await connectDB(process.env.DATABASE)
     app.listen(PORT, () =>{
       console.log(`${PORT} yes i am connected`);
     });

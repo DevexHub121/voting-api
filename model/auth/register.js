@@ -31,7 +31,7 @@ const registerSchema = new mongoose.Schema({
   },
   profileFile: {
     type: String,
-    required: [true, 'Please add a profileFile']
+    required: [false, 'Please add a profileFile']
   },
   createdAt: {
     type: Date,

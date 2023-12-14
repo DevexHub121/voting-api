@@ -15,7 +15,7 @@ const registerUser = async (req, res) => {
   try {
     const { firstName, lastName, email, password, voterId, city, state, profileFile } = req.body;
     console.log(req.body)
-    if (!firstName || !lastName || !email || !password ||  !voterId || !city || !state || !profileFile) {
+    if (!firstName || !lastName || !email || !password ||  !voterId || !city || !state) {
       return res.status(400).json({ message: "Please add all fields" });
     } 
 
@@ -40,7 +40,7 @@ const registerUser = async (req, res) => {
     const user = await newUser.save();
 
     if (user) {
-      return res.status(201).json("User Registered Successfully");
+      return res.status(200).json("User Registered Successfully");
     } else {
       res.status(400);
       throw new Error("Invalid user data");
