@@ -14,40 +14,36 @@ const generateToken = (id) => {
 const registerUser = async (req, res) => {
   try {
     const { firstName, lastName, email, password, voterId, city, state, profileFile } = req.body;
-    console.log(req.body)
     if (!firstName || !lastName || !email || !password ||  !voterId || !city || !state) {
       return res.status(400).json({ message: "Please add all fields" });
     } 
 
     const userExists = await UserRegister.findOne({ email });
     if (userExists) {
-      return res.status(400).json({ message: "User already exists" });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const newUser = new UserRegister({
-      firstName,
-      lastName,
-      email,
-      voterId,
-      city,
-      state,
-      profileFile,
-      password: hashedPassword,
-    });
-
-    const user = await newUser.save();
-
-    if (user) {
-      return res.status(200).json("User Registered Successfully");
-    } else {
-      res.status(400);
-      throw new Error("Invalid user data");
+       res.status(400).json({success: false, message: "User already exists" });
+    } else{
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const newUser = new UserRegister({
+        firstName,
+        lastName,
+        email,
+        voterId,
+        city,
+        state,
+        profileFile,
+        password: hashedPassword,
+      });
+      const user = await newUser.save();
+      if (user) {
+        return res.status(200).json({ success: true, message:"User Registered Successfully"});
+      } else {
+        res.status(400).json({success: true, message:"something went Wrong"});
+        throw new Error("Invalid user data");
+      }
     }
   } catch (error) {
     console.log("error: " + error);
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).json({success: true, message: "Internal Server Error" });
   }
 };
 

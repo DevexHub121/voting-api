@@ -25,7 +25,7 @@ app.use("/api/votes", voteRoutes);
 
 const start = async()=>{
   try{
-    await connectDB(process.env.DATABASE_ATLAS)
+    await connectDB(process.env.DATABASE)
     app.listen(PORT, () =>{
       console.log(`${PORT} yes i am connected`);
     });

@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const VotePosts = require("../../model/votes/votes");
 
+const mongoose = require("mongoose");
 const createPollVote = async (req, res) => {
     try {
         const {userId, vote, party } = req.body;
@@ -13,13 +14,13 @@ const createPollVote = async (req, res) => {
       
         const post = await newVotePost.save();
         if(post){
-            res.status(200).json({message: "vote saved successfully", status:"200"});
+            res.status(200).json({message: "vote saved successfully"});
         }else{
             res.json({message: "community post not added"});
         }
         
     } catch (error) {
-        
+        console.log("error: " + error);
     }
 }
 
@@ -68,11 +69,11 @@ const getVote = async (req, res) => {
     try {
         const userId = req.params.id;
         
-        const voteFound = await VotePosts.findOne({userId:userId});
+        const voteFound = await VotePosts.findOne({userId: mongoose.Types.ObjectId(userId)});
         if(voteFound){
-            res.status(200).json({data:voteFound,message: "Already voted", status:"200"});
+            res.status(400).json({data:voteFound,message: "Already voted", status:"200"});
         }else{
-            res.status(400).json({message: "vote", status:"400"});
+            res.status(200).json({message: "vote"});
         }
         
     } catch (error) {

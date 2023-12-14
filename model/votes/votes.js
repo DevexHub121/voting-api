@@ -2,7 +2,7 @@ const { default: mongoose } = require("mongoose");
 
 const votesSchema = new mongoose.Schema({
   userId: {
-    type: String,
+    type: mongoose.ObjectId,
     required: [true, 'Please add an email']
   },
   vote: {
