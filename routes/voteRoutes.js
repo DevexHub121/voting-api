@@ -5,7 +5,7 @@ const { getAllVotes, createPollVote, getVote } = require('../controllers/votes/v
 
 router.post('/pole-vote', createPollVote);
 router.get('/getAll-votes', getAllVotes);
-router.get('/get-vote/:id', getVote);
+router.get('/get-vote/:id/', getVote);
 //router.post('/me', protect, getMe);
 
 module.exports = router
