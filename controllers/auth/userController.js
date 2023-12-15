@@ -66,7 +66,6 @@ const loginUser = async (req, res) => {
 const profileData = async (req, res) => {
   try {
     const id  = req.params.id;
-    console.log("id ", id);
     const user = await UserRegister.findById(id);
     if (user) {
       res.status(200).json({
@@ -100,9 +99,11 @@ const uploadProfileFile = async (req, res) => {
 };
 const getImages = async(req, res) => {
      const data= await UserRegister.findOne({_id:req.params.id})
-     if(data){
-       const images= fs.readFileSync(`uploads/${data.profileFile}`,"base64")
+     if(data.profileFile!==''){
+       const images= fs.readFileSync(`uploads/${data?.profileFile}`,"base64")
        res.status(200).json({images})
+     }else{
+      res.status(200).json(data)
      }
 
 

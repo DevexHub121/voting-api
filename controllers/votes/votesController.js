@@ -68,10 +68,9 @@ const getAllVotes = async (req, res) => {
 const getVote = async (req, res) => {
     try {
         const userId = req.params.id;
-        
-        const voteFound = await VotePosts.findOne({userId: mongoose.Types.ObjectId(userId)});
+        const voteFound = await VotePosts.findOne({userId: userId});
         if(voteFound){
-            res.status(400).json({data:voteFound,message: "Already voted", status:"200"});
+            res.status(200).json({data:voteFound,message: "Already voted", status:"200"});
         }else{
             res.status(200).json({message: "vote"});
         }

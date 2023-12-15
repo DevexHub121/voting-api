@@ -14,7 +14,7 @@ const voteRoutes = require("./routes/voteRoutes")
 const allowedOrigins = [
  "https://voting-app-2015d.web.app",
  "https://voting-app-2015d.firebaseapp.com",
- //"http://localhost:5173"
+ //"http://127.0.0.1:5173"
 ];
 app.use(cors({
     origin: allowedOrigins,
